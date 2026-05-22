@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplikasi Ujian Online Modern</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 35px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .info-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-group label {
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .input-group input {
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .input-group input:focus {
+      border-color: #4facfe;
+      outline: none;
+      box-shadow: 0 0 10px rgba(79,172,254,0.4);
+    }
+
+    .question {
+      background: #f9fbff;
+      border-left: 6px solid #4facfe;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      transition: 0.3s;
+    }
+
+    .question:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .question h3 {
+      margin-bottom: 15px;
+      color: #222;
+    }
+
+    .option {
+      display: block;
+      background: white;
+      border: 2px solid #ddd;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .option:hover {
+      background: #eef7ff;
+      border-color: #4facfe;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #4facfe, #00c6fb);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .result {
+      margin-top: 30px;
+      background: #f0fff3;
+      border: 2px solid #28a745;
+      padding: 25px;
+      border-radius: 15px;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .result h2 {
+      color: #28a745;
+      margin-bottom: 15px;
+    }
+
+    .score {
+      font-size: 28px;
+      font-weight: bold;
+      color: #007bff;
+      margin-top: 10px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 25px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    @media(max-width: 600px) {
+      h1 {
+        font-size: 26px;
+      }
+
+      .container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>📝 Aplikasi Ujian Online</h1>
+  <p class="subtitle">Silakan isi data diri dan kerjakan soal dengan teliti</p>
+
+  <div class="info-box">
+    <div class="input-group">
+      <label>Nama Siswa</label>
+      <input type="text" id="nama" placeholder="Masukkan nama lengkap">
+    </div>
+
+    <div class="input-group">
+      <label>Kelas</label>
+      <input type="text" id="kelas" placeholder="Contoh: XII RPL 1">
+    </div>
+  </div>
+
+  <form id="quizForm">
+
+    <div class="question">
+      <h3>1. Ibukota Indonesia adalah?</h3>
+      <label class="option"><input type="radio" name="q1" value="a"> Bandung</label>
+      <label class="option"><input type="radio" name="q1" value="b"> Jakarta</label>
+      <label class="option"><input type="radio" name="q1" value="c"> Surabaya</label>
+      <label class="option"><input type="radio" name="q1" value="d"> Medan</label>
+    </div>
+
+    <div class="question">
+      <h3>2. 5 × 5 = ?</h3>
+      <label class="option"><input type="radio" name="q2" value="a"> 20</label>
+      <label class="option"><input type="radio" name="q2" value="b"> 15</label>
+      <label class="option"><input type="radio" name="q2" value="c"> 25</label>
+      <label class="option"><input type="radio" name="q2" value="d"> 30</label>
+    </div>
+
+    <div class="question">
+      <h3>3. Planet terbesar adalah?</h3>
+      <label class="option"><input type="radio" name="q3" value="a"> Mars</label>
+      <label class="option"><input type="radio" name="q3" value="b"> Venus</label>
+      <label class="option"><input type="radio" name="q3" value="c"> Jupiter</label>
+      <label class="option"><input type="radio" name="q3" value="d"> Saturnus</label>
+    </div>
+
+    <div class="question">
+      <h3>4. Bahasa pemrograman untuk web adalah?</h3>
+      <label class="option"><input type="radio" name="q4" value="a"> PHP</label>
+      <label class="option"><input type="radio" name="q4" value="b"> HTML</label>
+      <label class="option"><input type="radio" name="q4" value="c"> JavaScript</label>
+      <label class="option"><input type="radio" name="q4" value="d"> Semua benar</label>
+    </div>
+
+    <div class="question">
+      <h3>5. Lambang kimia air adalah?</h3>
+      <label class="option"><input type="radio" name="q5" value="a"> O2</label>
+      <label class="option"><input type="radio" name="q5" value="b"> CO2</label>
+      <label class="option"><input type="radio" name="q5" value="c"> H2O</label>
+      <label class="option"><input type="radio" name="q5" value="d"> NaCl</label>
+    </div>
+
+    <div class="question">
+      <h3>6. Presiden pertama Indonesia adalah?</h3>
+      <label class="option"><input type="radio" name="q6" value="a"> Soeharto</label>
+      <label class="option"><input type="radio" name="q6" value="b"> Jokowi</label>
+      <label class="option"><input type="radio" name="q6" value="c"> Soekarno</label>
+      <label class="option"><input type="radio" name="q6" value="d"> Habibie</label>
+    </div>
+
+    <div class="question">
+      <h3>7. 10 + 15 = ?</h3>
+      <label class="option"><input type="radio" name="q7" value="a"> 20</label>
+      <label class="option"><input type="radio" name="q7" value="b"> 25</label>
+      <label class="option"><input type="radio" name="q7" value="c"> 30</label>
+      <label class="option"><input type="radio" name="q7" value="d"> 35</label>
+    </div>
+
+    <div class="question">
+      <h3>8. Hewan berkaki delapan adalah?</h3>
+      <label class="option"><input type="radio" name="q8" value="a"> Kucing</label>
+      <label class="option"><input type="radio" name="q8" value="b"> Ayam</label>
+      <label class="option"><input type="radio" name="q8" value="c"> Laba-laba</label>
+      <label class="option"><input type="radio" name="q8" value="d"> Ikan</label>
+    </div>
+
+    <div class="question">
+      <h3>9. Warna bendera Indonesia adalah?</h3>
+      <label class="option"><input type="radio" name="q9" value="a"> Merah Putih</label>
+      <label class="option"><input type="radio" name="q9" value="b"> Biru Putih</label>
+      <label class="option"><input type="radio" name="q9" value="c"> Merah Biru</label>
+      <label class="option"><input type="radio" name="q9" value="d"> Hijau Putih</label>
+    </div>
+
+    <div class="question">
+      <h3>10. HTML digunakan untuk?</h3>
+      <label class="option"><input type="radio" name="q10" value="a"> Membuat website</label>
+      <label class="option"><input type="radio" name="q10" value="b"> Mengedit video</label>
+      <label class="option"><input type="radio" name="q10" value="c"> Bermain game</label>
+      <label class="option"><input type="radio" name="q10" value="d"> Menggambar</label>
+    </div>
+
+    <button type="button" class="btn" onclick="hitungNilai()">✅ Selesai Ujian</button>
+
+  </form>
+
+  <div class="result" id="hasil"></div>
+
+  <div class="footer">
+    © 2026 Aplikasi Ujian Online Modern
+  </div>
+
+</div>
+
+<script>
+  function hitungNilai() {
+
+    const jawabanBenar = {
+      q1: 'b',
+      q2: 'c',
+      q3: 'c',
+      q4: 'd',
+      q5: 'c',
+      q6: 'c',
+      q7: 'b',
+      q8: 'c',
+      q9: 'a',
+      q10: 'a'
+    };
+
+    let nilai = 0;
+
+    for (let key in jawabanBenar) {
+      let jawaban = document.querySelector(`input[name="${key}"]:checked`);
+
+      if (jawaban && jawaban.value === jawabanBenar[key]) {
+        nilai += 10;
+      }
+    }
+
+    let nama = document.getElementById('nama').value;
+    let kelas = document.getElementById('kelas').value;
+
+    if (nama === '' || kelas === '') {
+      alert('Nama dan kelas wajib diisi!');
+      return;
+    }
+
+    let grade = '';
+
+    if (nilai >= 90) {
+      grade = 'A';
+    } else if (nilai >= 80) {
+      grade = 'B';
+    } else if (nilai >= 70) {
+      grade = 'C';
+    } else {
+      grade = 'D';
+    }
+
+    let hasil = document.getElementById('hasil');
+
+    hasil.style.display = 'block';
+
+    hasil.innerHTML = `
+      <h2>🎉 Hasil Ujian</h2>
+      <p><b>Nama:</b> ${nama}</p>
+      <p><b>Kelas:</b> ${kelas}</p>
+      <div class="score">Nilai: ${nilai}</div>
+      <p><b>Grade:</b> ${grade}</p>
+    `;
+
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
+  }
+</script>
+
+</body>
+</html>
